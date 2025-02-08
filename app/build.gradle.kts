@@ -71,6 +71,7 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.room.paging)
     implementation(libs.room.ktx)
+    implementation(libs.androidx.junit.ktx)
     ksp(libs.room.combiler)
 
     implementation(libs.androidx.activity.ktx)
@@ -84,6 +85,12 @@ dependencies {
     implementation(libs.loggingInterceptor)
 
     testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.truth)
+    testImplementation (libs.mockwebserver)
+    testImplementation (libs.robolectric)
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
