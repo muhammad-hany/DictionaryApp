@@ -1,6 +1,7 @@
 package com.example.dictionaryapp
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -30,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import com.example.dictionaryapp.ui.theme.DictionaryAppTheme
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalContext
 import com.example.dictionaryapp.data.database.Word
 import com.example.dictionaryapp.data.database.WordDefinition
 import com.example.dictionaryapp.data.database.WordQuery
@@ -99,6 +101,8 @@ fun DictionaryScreen(
                     }
                 }.flatten()
                 DictionaryList(listItem)
+            } else if (state.value is ApiState.Error) {
+                ErrorMessage(state.value as ApiState.Error)
             }
         }
         if (state.value is ApiState.Loading) {
@@ -128,16 +132,7 @@ fun DictionaryList(items: List<Pair<Word, WordDefinition>>) {
 }
 
 @Composable
-fun PresentState(state: ApiState.Error) {
-
-}
-
-@Composable
-fun PresentState(state: ApiState.Default) {
-
-}
-
-@Composable
-fun PresentState(state: ApiState.Loading) {
-
+fun ErrorMessage(state: ApiState.Error) {
+    val context = LocalContext.current
+    Toast.makeText(context, "issue happened while trying to fetch data", Toast.LENGTH_SHORT).show()
 }
