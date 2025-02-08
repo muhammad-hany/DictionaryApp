@@ -8,13 +8,13 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 
-class RetrofitClient{
+class RetrofitClient(private val baseUrl: String = BuildConfig.BASE_URL){
     fun buildRetrofitInstance(moshi: Moshi): Retrofit {
         val logging = httpLoggingInterceptor()
         val httpClient = okhttpBuilder(logging)
         return Retrofit
             .Builder()
-            .baseUrl(BuildConfig.BASE_URL)
+            .baseUrl(baseUrl)
             .addConverterFactory(
                 MoshiConverterFactory.create(moshi)
             ).client(httpClient.build())
