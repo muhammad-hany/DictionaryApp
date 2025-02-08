@@ -12,6 +12,8 @@ import com.example.dictionaryapp.data.datasource.remote.RemoteDataSourceImpl
 import com.example.dictionaryapp.data.network.RetrofitClient
 import com.example.dictionaryapp.data.repository.DictionaryRepository
 import com.example.dictionaryapp.data.repository.DictionaryRepositoryImpl
+import com.example.dictionaryapp.domain.GetWordInfoUsecase
+import com.example.dictionaryapp.domain.GetWordInfoUsecaseImpl
 import com.squareup.moshi.Moshi
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -70,7 +72,11 @@ val appModule = module {
         )
     }
 
+    single<GetWordInfoUsecase> {
+        GetWordInfoUsecaseImpl(repository = get())
+    }
+
     viewModel {
-        MainViewModel(repository = get())
+        MainViewModel(getWordInfoUsecase = get())
     }
 }
